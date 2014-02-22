@@ -10,5 +10,7 @@ feature "static page" do
     expect(page).to have_text("Help page")
     visit "/static_pages/about"
     expect(page).to have_text("About Us")
+    
   end
 end
+

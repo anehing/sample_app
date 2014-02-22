@@ -25,6 +25,7 @@ describe "StaticPages" do
       expect(page).to have_title("Ruby on Rails Tutorial Sample App | About")
     end
   end
+
   
   describe "contact page" do
     it "should have the content 'Sample App'" do 
