@@ -7,7 +7,6 @@ gem 'bootstrap-sass'
 group :development, :test do
 	gem 'sqlite3', '1.3.8'
 	gem 'rspec-rails'
-  gem 'guard-rspec'
 	
 end
 
