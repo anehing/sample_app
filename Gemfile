@@ -2,12 +2,14 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
+gem 'bootstrap-sass'
 
 group :development, :test do
 	gem 'sqlite3', '1.3.8'
 	gem 'rspec-rails'
   gem 'spork-rails', '4.0.0'
   gem 'childprocess'
+
 end
 
 group :test do
