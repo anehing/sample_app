@@ -2,13 +2,13 @@ require 'spec_helper'
 
 feature "static page" do
   scenario "test the static route function" do
-    visit "/static_pages/home"
+    visit root_path
     expect(page).to have_text("Home page")
-    visit "/static_pages/contact"
+    visit contact_path
     expect(page).to have_text("Contact page")
-    visit "/static_pages/help"
+    visit help_path
     expect(page).to have_text("Help page")
-    visit "/static_pages/about"
+    visit about_path
     expect(page).to have_text("About Us")
     
   end

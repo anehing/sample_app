@@ -36,12 +36,12 @@ describe "Static pages" do
   describe "About page" do
   
     it "should have the h1 'About Us'" do
-      visit static_pages_about_path
+      visit "/about"
       expect(page).to have_content('About Us')
     end
   
     it "should have the title 'About Us'" do
-      visit static_pages_about_path
+      visit "/about"
       expect(page).to have_title("Ruby on Rails Tutorial Sample App | About Us")
     end
   end
