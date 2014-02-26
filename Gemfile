@@ -9,7 +9,8 @@ group :development, :test do
 	gem 'rspec-rails'
   gem 'spork-rails', '4.0.0'
   gem 'childprocess'
-
+  gem 'bcrypt-ruby' 
+  gem 'bcrypt' 
 end
 
 group :test do
