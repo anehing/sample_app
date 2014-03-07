@@ -49,15 +49,13 @@ describe "Authentication" do
           fill_in "Email",     with: user.email
           fill_in "Password",  with: user.password
           click_button "Sign in"
+          describe "after signing in " do
+            it "should render the desired protected page" do
+              expect(page).to have_title('Edit user')
+            end
+          end
         end
       end
-      describe "after signing in " do
-        
-        it "should render the desired protected page" do
-          expect(page).to have_title('Edit user')
-        end
-      end
-      
       describe "in the Users controller" do
         
         describe "visiting the edit page" do
