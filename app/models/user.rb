@@ -1,34 +1,56 @@
 class User < ActiveRecord::Base
-  before_save {self.email = email.downcase}
-  before_create :create_remember_token
-  # attr_accessor :name, :email
-  # 
-  # def initialize(attributes = {})
-  #    @name  = attributes[:name]
-  #    @email = attributes[:email]
-  # end
-  # 
-  # def formatted_email
-  #   "#{@name}<#{@email}>"
-  # end
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :name, presence: true, length: { maximum: 50, minimum: 5}
-  validates :email, presence: true,format: { with: VALID_EMAIL_REGEX },uniqueness: { case_sensitive: false}
-  validates :password, length: { minimum: 6 }
-  has_secure_password
-  
-  def User.new_remember_token
-     SecureRandom.urlsafe_base64
+ 
+  has_many :microposts,dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
+
+	before_save { self.email = email.downcase }
+	before_create :create_remember_token
+	validates :name,  presence: true, length: {maximum:50}
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },uniqueness:{ case_sensitive: false }
+
+    has_secure_password	
+    validates :password, length: { minimum: 6 }
+
+
+
+   def User.new_remember_token
+      SecureRandom.urlsafe_base64
    end
 
    def User.hash(token)
-     Digest::SHA1.hexdigest(token.to_s)
+      Digest::SHA1.hexdigest(token.to_s)
+   end
+   
+   def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.from_users_followed_by(self)
    end
 
+    def following?(other_user)
+      self.relationships.find_by(followed_id: other_user.id)
+    end
+
+    def follow!(other_user)
+      self.relationships.create!(followed_id: other_user.id)
+    end
+
+    def unfollow!(other_user)
+      self.relationships.find_by(followed_id: other_user.id).destroy
+    end
+
+    
+
    private
-   
-     def create_remember_token
-       
-       self.remember_token = User.hash(User.new_remember_token)
-     end
+
+   		def create_remember_token
+     		 self.remember_token = User.hash(User.new_remember_token)
+   		end
+     
+      
 end

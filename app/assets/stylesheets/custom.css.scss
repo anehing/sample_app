@@ -1,5 +1,7 @@
 @import "bootstrap";
-/* universal */
+
+/* mixins, variables, etc. */
+
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
@@ -7,6 +9,8 @@ $grayMediumLight: #eaeaea;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+/* universal */
 
 html {
   overflow-y: scroll;
@@ -26,8 +30,8 @@ textarea {
 
 .center {
   text-align: center;
-  h1{
-  	margin-bottom: 10px;
+  h1 {
+    margin-bottom: 10px;
   }
 }
 
@@ -57,21 +61,23 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
+
+
 /* header */
 
 #logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #fff;
+  color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
   line-height: 1;
   &:hover {
-  color: #fff;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
   }
 }
 
@@ -83,9 +89,9 @@ footer {
   border-top: 1px solid $grayMediumLight;
   color: $grayLight;
   a {
-    color: #555;
-	&:hover {
-     color: #222;
+    color: $gray;
+    &:hover {
+      color: $grayDarker;
     }
   }
   small {
@@ -94,12 +100,13 @@ footer {
   ul {
     float: right;
     list-style: none;
-	li {
-	  float: left;
-	  margin-left: 10px;
-	}
+    li {
+      float: left;
+      margin-left: 10px;
+    }
   }
 }
+
 /* miscellaneous */
 
 .debug_dump {
@@ -113,30 +120,60 @@ footer {
 /* sidebar */
 
 aside {
-	section {
-		padding: 10px 0;
-		border-top: 1px solid $grayLighter;
-		&:first-child{
-			border: 0;
-			padding-top: 0;
-		}
-		span {
-			display: block;
-			margin-bottom: 3px;
-			line-height: 1;
-		}
-		h1 {
-			font-size: 1.4em;
-			text-align: left;
-			letter-spacing: 3px;
-			margin-bottom: 3px;
-			margin-top: 0px;
-		}
-	}
+  section {
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+  }
 }
+
 .gravatar {
-	float: left;
-	margin-right: 10px;
+  float: left;
+  margin-right: 10px;
+}
+
+.stats {
+  overflow: auto;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
 }
 
 /* forms */
@@ -151,7 +188,6 @@ input, textarea, select, .uneditable-input {
 input {
   height: auto !important;
 }
-/* forms */
 
 #error_explanation {
   color: #f00;
@@ -164,16 +200,47 @@ input {
 .field_with_errors {
   @extend .control-group;
   @extend .error;
- }
- .users {
-   list-style: none;
-   margin: 0;
-   li {
-     overflow: auto;
-     padding: 10px 0;
-     border-top: 1px solid $grayLighter;
-     &:last-child {
-       border-bottom: 1px solid $grayLighter;
-     }
-   }
- }
+}
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+/* microposts */
+
+.microposts {
+  list-style: none;
+  margin: 16px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.content {
+  display: block;
+}
+.timestamp {
+  color: $grayLight;
+}
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
